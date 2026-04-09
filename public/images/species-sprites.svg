@@ -1,0 +1,337 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <style>
+      .species-icon { fill: none; stroke: #4ade80; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .species-icon-threat { stroke: #f87171; }
+      .species-icon-safe { stroke: #4ade80; }
+      .species-icon-food { stroke: #fbbf24; }
+      .species-fill { fill: #1c1917; }
+    </style>
+  </defs>
+  
+  <!-- Fer-de-lance snake -->
+  <g id="fer-de-lance" class="species-icon species-icon-threat">
+    <path d="M50 80 Q70 60 100 70 Q130 80 120 110 Q110 140 80 130 Q50 120 50 80"/>
+    <circle cx="85" cy="85" r="3" fill="#f87171"/>
+    <path d="M60 90 Q80 85 100 90"/>
+    <path d="M40 100 L30 120 M50 110 L45 130 M70 115 L75 135 M90 115 L85 135 M110 110 L120 130"/>
+  </g>
+  
+  <!-- Coral snake -->
+  <g id="coral-snake" class="species-icon species-icon-threat">
+    <path d="M150 100 Q170 90 190 100 Q210 110 200 130 Q190 150 170 140 Q150 130 150 100"/>
+    <path d="M155 105 L185 105" stroke="#f87171" stroke-width="3"/>
+    <path d="M160 115 L180 115" stroke="#fbbf24" stroke-width="3"/>
+    <path d="M155 125 L185 125" stroke="#1c1917" stroke-width="3"/>
+    <circle cx="165" cy="100" r="2" fill="#f87171"/>
+  </g>
+  
+  <!-- Bushmaster -->
+  <g id="bushmaster" class="species-icon species-icon-threat">
+    <path d="M220 70 Q240 50 270 60 Q300 70 290 100 Q280 130 250 120 Q220 110 220 70"/>
+    <path d="M230 75 Q250 70 270 75"/>
+    <path d="M240 85 L235 95 M255 85 L260 95 M270 85 L265 95"/>
+    <circle cx="255" cy="70" r="3" fill="#f87171"/>
+  </g>
+  
+  <!-- Dieffenbachia -->
+  <g id="dieffenbachia" class="species-icon species-icon-threat">
+    <path d="M50 200 L50 280"/>
+    <ellipse cx="30" cy="220" rx="25" ry="15" class="species-fill"/>
+    <ellipse cx="70" cy="220" rx="25" ry="15" class="species-fill"/>
+    <ellipse cx="30" cy="250" rx="25" ry="15" class="species-fill"/>
+    <ellipse cx="70" cy="250" rx="25" ry="15" class="species-fill"/>
+    <path d="M45 220 Q50 215 55 220" stroke="#4ade80"/>
+    <path d="M45 250 Q50 245 55 250" stroke="#4ade80"/>
+  </g>
+  
+  <!-- Manchineel tree -->
+  <g id="manchineel" class="species-icon species-icon-threat">
+    <rect x="85" y="220" width="10" height="60" class="species-fill"/>
+    <circle cx="90" cy="200" r="35" class="species-fill"/>
+    <circle cx="75" cy="190" r="8" fill="#f87171"/>
+    <circle cx="105" cy="195" r="8" fill="#f87171"/>
+    <circle cx="90" cy="175" r="8" fill="#f87171"/>
+  </g>
+  
+  <!-- Milky sap plant -->
+  <g id="apocynaceae" class="species-icon species-icon-threat">
+    <path d="M150 280 L150 220"/>
+    <ellipse cx="130" cy="240" rx="20" ry="12"/>
+    <ellipse cx="170" cy="240" rx="20" ry="12"/>
+    <ellipse cx="130" cy="260" rx="20" ry="12"/>
+    <ellipse cx="170" cy="260" rx="20" ry="12"/>
+    <circle cx="150" cy="220" r="15" fill="#f87171"/>
+    <path d="M145 215 L155 225 M155 215 L145 225" stroke="#1c1917" stroke-width="2"/>
+  </g>
+  
+  <!-- Maya nut -->
+  <g id="maya-nut" class="species-icon species-icon-safe">
+    <rect x="225" y="220" width="10" height="60" class="species-fill"/>
+    <circle cx="230" cy="200" r="30" class="species-fill"/>
+    <circle cx="220" cy="190" r="8" fill="#4ade80"/>
+    <circle cx="240" cy="195" r="8" fill="#4ade80"/>
+    <circle cx="230" cy="180" r="8" fill="#4ade80"/>
+    <circle cx="230" cy="210" r="10" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Soursop -->
+  <g id="soursop" class="species-icon species-icon-safe">
+    <ellipse cx="280" cy="230" rx="25" ry="30" class="species-fill"/>
+    <path d="M265 220 L260 215 M280 210 L280 200 M295 220 L300 215"/>
+    <circle cx="275" cy="235" r="3" fill="#4ade80"/>
+    <circle cx="285" cy="235" r="3" fill="#4ade80"/>
+  </g>
+  
+  <!-- Coconut palm -->
+  <g id="coconut" class="species-icon species-icon-safe">
+    <path d="M340 280 Q345 240 340 200"/>
+    <path d="M340 200 L320 180 M340 200 L360 180 M340 200 L315 210 M340 200 L365 210 M340 200 L340 175"/>
+    <circle cx="335" cy="210" r="6" fill="#fbbf24"/>
+    <circle cx="345" cy="215" r="6" fill="#fbbf24"/>
+    <circle cx="340" cy="225" r="6" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Avocado -->
+  <g id="avocado" class="species-icon species-icon-safe">
+    <ellipse cx="390" cy="230" rx="20" ry="28" class="species-fill"/>
+    <circle cx="390" cy="230" r="10" fill="#78350f"/>
+    <path d="M390 202 L390 195"/>
+    <ellipse cx="390" cy="195" rx="8" ry="5" fill="#4ade80"/>
+  </g>
+  
+  <!-- Guava -->
+  <g id="guava" class="species-icon species-icon-safe">
+    <circle cx="440" cy="230" r="18" class="species-fill"/>
+    <circle cx="435" cy="225" r="2" fill="#fbbf24"/>
+    <circle cx="445" cy="225" r="2" fill="#fbbf24"/>
+    <circle cx="435" cy="235" r="2" fill="#fbbf24"/>
+    <circle cx="445" cy="235" r="2" fill="#fbbf24"/>
+    <path d="M440 212 L440 205"/>
+    <ellipse cx="440" cy="205" rx="6" ry="4" fill="#4ade80"/>
+  </g>
+  
+  <!-- Papaya -->
+  <g id="papaya" class="species-icon species-icon-safe">
+    <ellipse cx="490" cy="230" rx="18" ry="30" class="species-fill"/>
+    <circle cx="485" cy="220" r="3" fill="#1c1917"/>
+    <circle cx="495" cy="220" r="3" fill="#1c1917"/>
+    <circle cx="485" cy="230" r="3" fill="#1c1917"/>
+    <circle cx="495" cy="230" r="3" fill="#1c1917"/>
+    <circle cx="490" cy="240" r="3" fill="#1c1917"/>
+    <path d="M490 200 L490 195"/>
+    <ellipse cx="490" cy="195" rx="10" ry="6" fill="#4ade80"/>
+  </g>
+  
+  <!-- Agouti -->
+  <g id="agouti" class="species-icon species-icon-food">
+    <ellipse cx="550" cy="240" rx="25" ry="15" class="species-fill"/>
+    <circle cx="565" cy="235" r="8" class="species-fill"/>
+    <circle cx="570" cy="233" r="2" fill="#fbbf24"/>
+    <ellipse cx="545" cy="245" rx="8" ry="5" class="species-fill"/>
+    <ellipse cx="555" cy="250" rx="5" ry="8" class="species-fill"/>
+    <ellipse cx="565" cy="250" rx="5" ry="8" class="species-fill"/>
+  </g>
+  
+  <!-- Paca -->
+  <g id="paca" class="species-icon species-icon-food">
+    <ellipse cx="610" cy="240" rx="30" ry="18" class="species-fill"/>
+    <circle cx="630" cy="235" r="10" class="species-fill"/>
+    <circle cx="635" cy="232" r="2" fill="#fbbf24"/>
+    <circle cx="615" cy="238" r="3" fill="#fbbf24"/>
+    <circle cx="625" cy="242" r="3" fill="#fbbf24"/>
+    <ellipse cx="605" cy="250" rx="6" ry="10" class="species-fill"/>
+    <ellipse cx="615" cy="252" rx="6" ry="10" class="species-fill"/>
+  </g>
+  
+  <!-- Iguana (food) -->
+  <g id="iguana-food" class="species-icon species-icon-food">
+    <ellipse cx="680" cy="240" rx="30" ry="12" class="species-fill"/>
+    <circle cx="700" cy="238" r="8" class="species-fill"/>
+    <circle cx="705" cy="236" r="2" fill="#fbbf24"/>
+    <path d="M685 230 L690 225 L695 230 L700 225 L705 230"/>
+    <ellipse cx="675" cy="245" rx="6" ry="10" class="species-fill"/>
+    <ellipse cx="685" cy="248" rx="6" ry="10" class="species-fill"/>
+    <path d="M710 240 Q720 245 725 240"/>
+  </g>
+  
+  <!-- Centipede -->
+  <g id="centipede" class="species-icon species-icon-threat">
+    <ellipse cx="50" cy="350" rx="40" ry="8" class="species-fill"/>
+    <path d="M20 345 L10 340 M25 355 L15 360 M35 345 L25 340 M40 355 L30 360 M50 345 L40 340 M55 355 L45 360 M65 345 L55 340 M70 355 L60 360 M80 345 L70 340 M85 355 L75 360"/>
+    <circle cx="85" cy="350" r="5" fill="#f87171"/>
+  </g>
+  
+  <!-- Scorpion -->
+  <g id="scorpion" class="species-icon species-icon-threat">
+    <ellipse cx="150" cy="350" rx="20" ry="10" class="species-fill"/>
+    <path d="M170 350 Q180 340 185 330 Q190 320 185 315"/>
+    <circle cx="185" cy="315" r="3" fill="#f87171"/>
+    <path d="M135 355 L125 365 M145 355 L155 365"/>
+    <path d="M135 345 L125 335 M145 345 L155 335"/>
+    <path d="M165 345 L175 335 M165 355 L175 365"/>
+  </g>
+  
+  <!-- Tarantula -->
+  <g id="tarantula" class="species-icon species-icon-threat">
+    <ellipse cx="230" cy="350" rx="15" ry="12" class="species-fill"/>
+    <circle cx="230" cy="335" r="10" class="species-fill"/>
+    <path d="M220 340 L205 330 M220 350 L205 355 M220 360 L205 370"/>
+    <path d="M240 340 L255 330 M240 350 L255 355 M240 360 L255 370"/>
+    <circle cx="227" cy="333" r="2" fill="#f87171"/>
+    <circle cx="233" cy="333" r="2" fill="#f87171"/>
+  </g>
+  
+  <!-- Mosquito -->
+  <g id="mosquito" class="species-icon species-icon-threat">
+    <ellipse cx="300" cy="350" rx="8" ry="4" class="species-fill"/>
+    <path d="M308 350 L318 348"/>
+    <path d="M295 348 L285 340 M295 352 L285 360"/>
+    <path d="M302 346 L300 335 M305 346 L307 335"/>
+    <circle cx="310" cy="350" r="2" fill="#f87171"/>
+  </g>
+  
+  <!-- Bullet ant -->
+  <g id="bullet-ant" class="species-icon species-icon-threat">
+    <ellipse cx="360" cy="350" rx="15" ry="5" class="species-fill"/>
+    <circle cx="370" cy="350" r="6" class="species-fill"/>
+    <circle cx="350" cy="350" r="5" class="species-fill"/>
+    <path d="M365 355 L370 365 M370 355 L375 365 M355 355 L350 365 M360 355 L355 365"/>
+    <path d="M375 350 L385 348"/>
+  </g>
+  
+  <!-- Kissing bug -->
+  <g id="kissing-bug" class="species-icon species-icon-threat">
+    <ellipse cx="430" cy="350" rx="12" ry="8" class="species-fill"/>
+    <path d="M442 350 L450 348"/>
+    <path d="M425 345 L415 338 M435 345 L445 338"/>
+    <path d="M425 355 L415 362 M435 355 L445 362"/>
+    <path d="M418 350 L408 350"/>
+    <circle cx="435" cy="348" r="2" fill="#f87171"/>
+  </g>
+  
+  <!-- Banana -->
+  <g id="banana" class="species-icon species-icon-safe">
+    <path d="M500 340 Q510 335 515 345 Q520 355 515 365 Q510 375 500 370 Q490 365 495 355 Q500 345 500 340"/>
+    <path d="M500 340 L500 335"/>
+    <ellipse cx="500" cy="335" rx="5" ry="3" fill="#4ade80"/>
+  </g>
+  
+  <!-- Mango -->
+  <g id="mango" class="species-icon species-icon-safe">
+    <ellipse cx="560" cy="350" rx="20" ry="25" class="species-fill"/>
+    <path d="M560 325 L560 318"/>
+    <ellipse cx="560" cy="318" rx="8" ry="5" fill="#4ade80"/>
+    <circle cx="555" cy="345" r="3" fill="#fbbf24"/>
+    <circle cx="565" cy="355" r="3" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Pineapple -->
+  <g id="pineapple" class="species-icon species-icon-safe">
+    <ellipse cx="620" cy="355" rx="15" ry="22" class="species-fill"/>
+    <path d="M610 340 L605 330 M620 335 L620 325 M630 340 L635 330"/>
+    <path d="M620 333 L620 325"/>
+    <ellipse cx="620" cy="325" rx="10" ry="6" fill="#4ade80"/>
+    <circle cx="615" cy="350" r="2" fill="#fbbf24"/>
+    <circle cx="625" cy="350" r="2" fill="#fbbf24"/>
+    <circle cx="620" cy="360" r="2" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Cashew -->
+  <g id="cashew" class="species-icon species-icon-safe">
+    <ellipse cx="690" cy="355" rx="18" ry="15" class="species-fill"/>
+    <path d="M690 340 L690 335"/>
+    <ellipse cx="690" cy="335" rx="10" ry="8" fill="#f87171"/>
+    <circle cx="685" cy="355" r="3" fill="#fbbf24"/>
+    <circle cx="695" cy="355" r="3" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Deer -->
+  <g id="deer" class="species-icon species-icon-food">
+    <ellipse cx="750" cy="355" rx="25" ry="15" class="species-fill"/>
+    <circle cx="770" cy="348" r="8" class="species-fill"/>
+    <circle cx="775" cy="346" r="2" fill="#fbbf24"/>
+    <path d="M765 340 L760 330 L765 325 M772 340 L777 330 L772 325"/>
+    <ellipse cx="745" cy="365" rx="6" ry="12" class="species-fill"/>
+    <ellipse cx="755" cy="368" rx="6" ry="12" class="species-fill"/>
+    <path d="M775 355 Q785 360 790 355"/>
+  </g>
+  
+  <!-- Peccary -->
+  <g id="peccary" class="species-icon species-icon-food">
+    <ellipse cx="50" cy="470" rx="28" ry="18" class="species-fill"/>
+    <circle cx="70" cy="465" r="10" class="species-fill"/>
+    <circle cx="75" cy="463" r="2" fill="#fbbf24"/>
+    <path d="M78 468 L82 472"/>
+    <ellipse cx="45" cy="480" rx="7" ry="10" class="species-fill"/>
+    <ellipse cx="55" cy="483" rx="7" ry="10" class="species-fill"/>
+    <path d="M60 455 L65 445 M70 455 L75 445"/>
+  </g>
+  
+  <!-- Armadillo -->
+  <g id="armadillo" class="species-icon species-icon-food">
+    <ellipse cx="130" cy="470" rx="30" ry="18" class="species-fill"/>
+    <path d="M110 470 L105 465 M120 470 L115 465 M130 470 L125 465 M140 470 L135 465 M150 470 L145 465"/>
+    <circle cx="155" cy="468" r="6" class="species-fill"/>
+    <circle cx="158" cy="466" r="2" fill="#fbbf24"/>
+    <path d="M158 470 L162 475"/>
+    <ellipse cx="125" cy="482" rx="5" ry="8" class="species-fill"/>
+    <ellipse cx="135" cy="482" rx="5" ry="8" class="species-fill"/>
+  </g>
+  
+  <!-- Fish (generic) -->
+  <g id="fish" class="species-icon species-icon-food">
+    <ellipse cx="220" cy="470" rx="25" ry="12" class="species-fill"/>
+    <path d="M245 470 L255 465 L255 475 Z" class="species-fill"/>
+    <circle cx="230" cy="467" r="2" fill="#fbbf24"/>
+    <path d="M210 470 Q200 470 195 465 M210 470 Q200 470 195 475"/>
+    <path d="M220 458 L220 453 M230 458 L230 453 M240 458 L240 453"/>
+  </g>
+  
+  <!-- Crab -->
+  <g id="crab" class="species-icon species-icon-food">
+    <ellipse cx="300" cy="470" rx="20" ry="12" class="species-fill"/>
+    <circle cx="285" cy="465" r="5" class="species-fill"/>
+    <circle cx="315" cy="465" r="5" class="species-fill"/>
+    <path d="M280 465 L270 460 L265 470 M320 465 L330 460 L335 470"/>
+    <path d="M285 475 L280 485 M295 478 L295 488 M305 478 L305 488 M315 475 L320 485"/>
+    <circle cx="283" cy="463" r="2" fill="#fbbf24"/>
+    <circle cx="317" cy="463" r="2" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Shrimp -->
+  <g id="shrimp" class="species-icon species-icon-food">
+    <path d="M370 465 Q380 460 390 465 Q400 470 395 480 Q390 490 380 485 Q370 480 370 465"/>
+    <path d="M390 465 L398 462 M385 468 L395 465 M380 473 L390 470"/>
+    <path d="M375 478 L370 485 M380 482 L378 490"/>
+    <circle cx="388" cy="465" r="2" fill="#fbbf24"/>
+    <path d="M390 465 L398 460"/>
+  </g>
+  
+  <!-- Bird (generic) -->
+  <g id="bird" class="species-icon species-icon-food">
+    <ellipse cx="450" cy="470" rx="18" ry="12" class="species-fill"/>
+    <circle cx="465" cy="468" r="8" class="species-fill"/>
+    <path d="M473 468 L480 470 L473 472"/>
+    <circle cx="468" cy="466" r="2" fill="#fbbf24"/>
+    <path d="M445 475 L440 485 M455 478 L455 488 M465 478 L465 488"/>
+    <path d="M435 470 Q425 465 420 470 Q425 475 435 470"/>
+  </g>
+  
+  <!-- Turtle -->
+  <g id="turtle" class="species-icon species-icon-food">
+    <ellipse cx="530" cy="470" rx="25" ry="15" class="species-fill"/>
+    <circle cx="555" cy="468" r="7" class="species-fill"/>
+    <circle cx="560" cy="466" r="2" fill="#fbbf24"/>
+    <ellipse cx="525" cy="480" rx="5" ry="8" class="species-fill"/>
+    <ellipse cx="535" cy="480" rx="5" ry="8" class="species-fill"/>
+    <ellipse cx="545" cy="480" rx="5" ry="8" class="species-fill"/>
+    <path d="M558 473 L562 478"/>
+  </g>
+  
+  <!-- Warning symbol for threats -->
+  <g id="warning-symbol">
+    <path d="M700 470 L710 450 L720 470 Z" fill="none" stroke="#f87171" stroke-width="2"/>
+    <text x="710" y="465" font-size="12" fill="#f87171" text-anchor="middle" font-family="Arial" font-weight="bold">!</text>
+  </g>
+</svg>
