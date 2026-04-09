@@ -91,7 +91,7 @@ export const SPECIES: Species[] = [
     protocol: 'Immobilize, evacuate immediately. Do not use tourniquets or cut the wound.',
     identificationTips: "Small, stout terrestrial viper with varying brown/gray patterns. Found primarily in higher altitudes (above 1000m).",
     localLaws: "General wildlife protection applies.",
-    image: '/images/jumping-viper.jpg'
+    image: '/images/godmans-viper.jpg'
   },
   {
     name: 'Hognose Pit Viper (Porthidium nasutum)',
@@ -259,7 +259,7 @@ export const SPECIES: Species[] = [
     protocol: 'Do NOT squeeze. Cover breathing hole to suffocate larva, then extract surgically. Seek medical removal.',
     identificationTips: "Adult fly resembles a small bumblebee. The larvae present as a painful, raised, red boil on the skin with a visible central breathing pore.",
     localLaws: "None.",
-    image: '/images/mosquito.jpg'
+    image: '/images/botfly.jpg'
   },
   {
     name: 'Sand Flea (Tunga penetrans)',
@@ -301,7 +301,7 @@ export const SPECIES: Species[] = [
     protocol: 'Seal cracks in housing, use bed nets, remove animal nests near dwelling.',
     identificationTips: "Looks nearly identical to kissing bug; elongated head with prominent cone shape.",
     localLaws: "Public health menace.",
-    image: '/images/kissing-bug.jpg'
+    image: '/images/cone-nose-bug.jpg'
   },
   {
     name: 'Dieffenbachia (Dumbcane)',
