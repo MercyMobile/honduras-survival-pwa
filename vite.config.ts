@@ -8,8 +8,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Honduras Survival Guide',
-        short_name: 'Survival',
+        name: "Mercy Mobile's Missionary Survival Guide - Copán department, Honduras",
+        short_name: 'MM Survival',
         description: 'Wilderness Survival Guide for Honduras',
         theme_color: '#1a1a1a',
         icons: [

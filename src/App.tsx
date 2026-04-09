@@ -27,11 +27,11 @@ function App() {
       <header className="relative bg-stone-950/80 backdrop-blur-xl border-b border-stone-800/60 p-4 shrink-0 flex items-center justify-between z-20 shadow-sm">
         <div className="absolute inset-0 bg-gradient-to-r from-lime-500/5 via-transparent to-transparent pointer-events-none" />
         <div className="relative flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-lime-400 to-lime-600 flex items-center justify-center shadow-lg shadow-lime-500/20">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-lime-400 to-lime-600 flex items-center justify-center shadow-lg shadow-lime-500/20 shrink-0">
             <Droplet size={18} className="text-stone-950" strokeWidth={2.5} />
           </div>
-          <h1 className="text-lg font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-stone-100 to-stone-400">
-            {language === 'en' ? 'Honduras Survival' : 'Supervivencia'}
+          <h1 className="text-sm sm:text-base font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-stone-100 to-stone-400 leading-tight line-clamp-2 md:line-clamp-1">
+            {language === 'en' ? "Mercy Mobile's Missionary Survival Guide - Copán department, Honduras" : "Guía de Supervivencia Misionera de Mercy Mobile - Departamento de Copán, Honduras"}
           </h1>
         </div>
         <div className="flex items-center gap-4 relative">
