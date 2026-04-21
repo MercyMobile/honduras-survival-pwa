@@ -1,12 +1,167 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Purple & Gold Luxury Theme - Design Tokens (Tailwind v4)
+   ============================================================ */
+@theme {
+  /* Fonts */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  /* Base surfaces (deep indigo-purple to near-black) */
+  --color-obsidian-950: #07040F;
+  --color-obsidian-900: #0B0614;
+  --color-obsidian-800: #140B22;
+  --color-obsidian-700: #1E1133;
+  --color-obsidian-600: #281847;
+
+  /* Royal purple line (borders, accents, depth) */
+  --color-royal-900: #1C0D38;
+  --color-royal-800: #2D1B4E;
+  --color-royal-700: #3D2563;
+  --color-royal-600: #5B3A9E;
+  --color-royal-500: #7C3AED;
+  --color-royal-400: #A855F7;
+  --color-royal-300: #C084FC;
+
+  /* Gold (jewelry accent) */
+  --color-gold-50: #FBF5DC;
+  --color-gold-100: #F7E9B8;
+  --color-gold-200: #F3D07A;
+  --color-gold-300: #E6BE4E;
+  --color-gold-400: #D4AF37;
+  --color-gold-500: #B8941E;
+  --color-gold-600: #8E6F14;
+  --color-gold-700: #5C470B;
+  --color-gold-800: #3A2D07;
+
+  /* Lavender-tinted neutrals for text */
+  --color-parchment-50: #F8F4EA;
+  --color-parchment-100: #F0E9D6;
+  --color-parchment-200: #D9CFE8;
+  --color-parchment-300: #B8A9D9;
+  --color-parchment-400: #8B7BB8;
+  --color-parchment-500: #6B5C96;
+  --color-parchment-600: #4D4270;
+}
+
 html, body, #root {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #1c1917; /* stone-900 */
-  color: #e7e5e4; /* stone-200 */
-  font-family: system-ui, -apple-system, sans-serif;
-  overflow: hidden; /* handled by App layout */
+  background-color: #07040F;
+  color: #F0E9D6;
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+/* App-wide polished background: deep obsidian + subtle violet bloom */
+body {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124, 58, 237, 0.15), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(212, 175, 55, 0.05), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 0% 80%, rgba(91, 58, 158, 0.08), transparent 60%),
+    #07040F;
+  background-attachment: fixed;
+}
+
+/* Scrollbar styling (webkit) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3D2563, #2D1B4E);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5B3A9E, #3D2563);
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(212, 175, 55, 0.3);
+  color: #FBF5DC;
+}
+
+/* Utility: scrollbar-hide */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Leaflet popup refinement (purple-gold themed) */
+.leaflet-popup-content-wrapper {
+  background: rgba(20, 11, 34, 0.95) !important;
+  color: #F0E9D6 !important;
+  border: 1px solid rgba(61, 37, 99, 0.8) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.1) !important;
+  backdrop-filter: blur(12px);
+}
+.leaflet-popup-tip {
+  background: rgba(20, 11, 34, 0.95) !important;
+  border: 1px solid rgba(61, 37, 99, 0.8) !important;
+}
+.leaflet-popup-content {
+  font-family: var(--font-sans);
+  margin: 12px 14px !important;
+}
+.leaflet-popup-content b {
+  color: #D4AF37;
+  font-weight: 600;
+}
+.leaflet-popup-content small {
+  color: #8B7BB8;
+  font-family: var(--font-mono);
+}
+.leaflet-container {
+  background: #0B0614 !important;
+  font-family: var(--font-sans);
+}
+.leaflet-control-zoom a {
+  background: rgba(20, 11, 34, 0.9) !important;
+  color: #D4AF37 !important;
+  border: 1px solid rgba(61, 37, 99, 0.8) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: rgba(40, 24, 71, 0.95) !important;
+}
+
+/* Subtle animated gold shimmer utility */
+@keyframes gold-shimmer {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+.gold-shimmer {
+  animation: gold-shimmer 3s ease-in-out infinite;
+}
+
+/* Gradient border utility (using background-clip trick) */
+.gradient-border-gold {
+  position: relative;
+  background-clip: padding-box;
+}
+.gradient-border-gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.5), rgba(124, 58, 237, 0.3), transparent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
 }

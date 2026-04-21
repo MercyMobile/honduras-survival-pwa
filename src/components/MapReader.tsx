@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, MapPin, X, Check } from 'lucide-react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -38,33 +38,42 @@ const LOCATIONS: MapLocation[] = [
   { name: 'Puerto Lempira', nameEs: 'Puerto Lempira', lat: 15.27, lng: -83.8, type: 'rescue', description: 'Regional airport in La Mosquitia', descriptionEs: 'Aeropuerto regional en La Mosquitia' },
 ];
 
+// Purple/gold aligned marker colors
 const TYPE_COLORS: Record<string, string> = {
-  river: '#3b82f6',
-  danger: '#ef4444',
-  safe: '#22c55e',
-  rescue: '#f59e0b',
-  city: '#64748b',
-  camp: '#8b5cf6',
-  water: '#06b6d4',
+  river: '#60A5FA',
+  danger: '#F87171',
+  safe: '#34D399',
+  rescue: '#D4AF37',
+  city: '#C084FC',
+  camp: '#A855F7',
+  water: '#22D3EE',
 };
 
-export default function MapReader() {
+interface MapReaderProps {
+  language: 'en' | 'es';
+}
+
+function sanitizeForPopup(text: string): string {
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+export default function MapReader({ language }: MapReaderProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const [userPosition, setUserPosition] = useState<{ lat: number; lng: number } | null>(null);
   const [showAddWaypoint, setShowAddWaypoint] = useState(false);
   const [newWaypoint, setNewWaypoint] = useState({ name: '', type: 'camp' as Waypoint['type'], notes: '' });
   const [online, setOnline] = useState(navigator.onLine);
-  const [language] = useState<'en' | 'es'>(() => {
-    const saved = localStorage.getItem('survival-language');
-    return (saved === 'es' ? 'es' : 'en') as 'en' | 'es';
-  });
 
   const t = (en: string, es: string) => language === 'en' ? en : es;
 
   const getSavedWaypoints = (): Waypoint[] => {
-    const saved = localStorage.getItem('survival-waypoints');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('survival-waypoints');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   };
 
   const [waypoints, setWaypoints] = useState<Waypoint[]>(getSavedWaypoints);
@@ -94,12 +103,11 @@ export default function MapReader() {
       maxZoom: 18,
     }).addTo(map);
 
-    // Add location markers
     LOCATIONS.forEach(loc => {
-      const color = TYPE_COLORS[loc.type] || '#a3a3a3';
+      const color = TYPE_COLORS[loc.type] || '#C084FC';
       const icon = L.divIcon({
         className: 'custom-marker',
-        html: `<div style="background:${color};width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,0.5);"></div>`,
+        html: `<div style="background:${color};width:14px;height:14px;border-radius:50%;border:2px solid #F0E9D6;box-shadow:0 2px 6px rgba(0,0,0,0.6),0 0 10px ${color}80;"></div>`,
         iconSize: [14, 14],
         iconAnchor: [7, 7],
       });
@@ -110,7 +118,6 @@ export default function MapReader() {
 
     mapRef.current = map;
 
-    // Geolocation
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
@@ -118,7 +125,7 @@ export default function MapReader() {
           setUserPosition({ lat: latitude, lng: longitude });
           const userIcon = L.divIcon({
             className: 'custom-marker',
-            html: `<div style="background:#22c55e;width:18px;height:18px;border-radius:50%;border:3px solid #16a34a;box-shadow:0 0 10px rgba(34,197,94,0.6);"></div>`,
+            html: `<div style="background:#D4AF37;width:18px;height:18px;border-radius:50%;border:3px solid #8E6F14;box-shadow:0 0 14px rgba(212,175,55,0.8);"></div>`,
             iconSize: [18, 18],
             iconAnchor: [9, 9],
           });
@@ -137,26 +144,24 @@ export default function MapReader() {
     };
   }, []);
 
-  // Update waypoints on map
   useEffect(() => {
     if (!mapRef.current) return;
-    // Remove old waypoint markers (we'll re-add all)
     mapRef.current.eachLayer((layer) => {
       if (layer instanceof L.Marker && (layer.getPopup()?.getContent() as string)?.includes('waypoint-')) {
         mapRef.current!.removeLayer(layer);
       }
     });
     waypoints.forEach(wp => {
-      const color = TYPE_COLORS[wp.type] || '#a3a3a3';
+      const color = TYPE_COLORS[wp.type] || '#C084FC';
       const icon = L.divIcon({
         className: 'custom-marker',
-        html: `<div style="background:${color};width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.5);"></div>`,
+        html: `<div style="background:${color};width:12px;height:12px;border-radius:50%;border:2px solid #F0E9D6;box-shadow:0 2px 6px rgba(0,0,0,0.5);"></div>`,
         iconSize: [12, 12],
         iconAnchor: [6, 6],
       });
       L.marker([wp.lat, wp.lng], { icon })
         .addTo(mapRef.current!)
-        .bindPopup(`<b>waypoint-${wp.id}</b><br/>${wp.name}<br/><small>${wp.notes}</small>`);
+        .bindPopup(`<b>waypoint-${sanitizeForPopup(wp.id)}</b><br/>${sanitizeForPopup(wp.name)}<br/><small>${sanitizeForPopup(wp.notes)}</small>`);
     });
   }, [waypoints]);
 
@@ -186,16 +191,19 @@ export default function MapReader() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="bg-stone-950 p-2 border-b border-stone-800 shrink-0 flex items-center justify-between">
+      {/* Top status bar */}
+      <div className="bg-obsidian-900/80 backdrop-blur-xl px-4 py-2.5 border-b border-royal-800/60 shrink-0 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h2 className="text-sm font-bold text-stone-200">{t('Map', 'Mapa')}</h2>
-          <span className={`text-xs font-mono ${online ? 'text-green-400' : 'text-yellow-500'}`}>
-            {online ? t('ONLINE', 'EN LÍNEA') : t('OFFLINE', 'SIN CONEXIÓN')}
+          <h2 className="font-display text-base font-semibold text-gold-200 tracking-wide">{t('Map', 'Mapa')}</h2>
+          <span className={`flex items-center gap-1.5 text-[10px] font-bold font-mono tracking-[0.2em] uppercase ${online ? 'text-emerald-300' : 'text-gold-300'}`}>
+            <span className={`w-1.5 h-1.5 rounded-full ${online ? 'bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]' : 'bg-gold-400 shadow-[0_0_6px_rgba(212,175,55,0.8)]'}`} />
+            {online ? t('Online', 'En línea') : t('Offline', 'Sin conexión')}
           </span>
         </div>
         {userPosition && (
-          <span className="text-xs text-lime-400 font-mono">
-            📍 {userPosition.lat.toFixed(4)}, {userPosition.lng.toFixed(4)}
+          <span className="text-[11px] text-gold-200 font-mono tracking-tight flex items-center gap-1.5 bg-obsidian-800/60 px-2.5 py-1 rounded-full border border-gold-400/20">
+            <MapPin size={11} className="text-gold-300" />
+            {userPosition.lat.toFixed(4)}, {userPosition.lng.toFixed(4)}
           </span>
         )}
       </div>
@@ -203,32 +211,42 @@ export default function MapReader() {
       <div className="flex-1 relative">
         <div ref={mapContainer} id="map-root" className="absolute inset-0" />
         {!online && (
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-yellow-900/90 text-yellow-200 text-xs px-3 py-1 rounded-full z-[1000]">
+          <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-gold-800/90 backdrop-blur-md text-gold-100 text-xs px-4 py-1.5 rounded-full z-[1000] border border-gold-400/40 shadow-lg">
             {t('Map tiles require internet. Previously viewed areas may work.', 'Los mapas requieren internet. Áreas vistas previamente pueden funcionar.')}
           </div>
         )}
       </div>
 
-      <div className="bg-stone-950 border-t border-stone-800 shrink-0 max-h-36 overflow-y-auto p-2">
-        <div className="flex flex-wrap gap-1 mb-2">
+      {/* Bottom control panel */}
+      <div className="bg-obsidian-900/90 backdrop-blur-xl border-t border-royal-800/60 shrink-0 max-h-44 overflow-y-auto p-3 scrollbar-hide">
+        <div className="flex flex-wrap gap-1.5 mb-2.5">
           {LOCATIONS.map((loc, i) => (
             <button
               key={i}
               onClick={() => mapRef.current?.setView([loc.lat, loc.lng], 10)}
-              className="flex items-center gap-1 px-2 py-1 rounded text-xs bg-stone-800 text-stone-400 hover:bg-stone-700"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium bg-obsidian-800/70 text-parchment-200 hover:bg-royal-800/50 hover:text-gold-200 border border-royal-800/50 hover:border-gold-400/30 transition-all"
             >
-              <span style={{ color: TYPE_COLORS[loc.type] }}>●</span>
+              <span style={{ color: TYPE_COLORS[loc.type] }} className="text-base leading-none">●</span>
               {language === 'en' ? loc.name : loc.nameEs}
             </button>
           ))}
         </div>
 
         {waypoints.length > 0 && (
-          <div className="border-t border-stone-700 pt-1 mb-1">
+          <div className="border-t border-royal-800/50 pt-2 mb-2 space-y-1">
             {waypoints.map(wp => (
-              <div key={wp.id} className="flex items-center justify-between bg-stone-800 rounded px-2 py-1 mb-1">
-                <span className="text-xs text-stone-300"><span style={{ color: TYPE_COLORS[wp.type] }}>●</span> {wp.name} <span className="text-stone-500">{wp.notes}</span></span>
-                <button onClick={() => deleteWaypoint(wp.id)} className="text-red-400 hover:text-red-300"><Trash2 size={12} /></button>
+              <div key={wp.id} className="flex items-center justify-between bg-obsidian-800/60 border border-royal-800/40 rounded-lg px-2.5 py-1.5">
+                <span className="text-xs text-parchment-100 flex items-center gap-1.5">
+                  <span style={{ color: TYPE_COLORS[wp.type] }} className="text-base leading-none">●</span>
+                  <span className="font-medium">{wp.name}</span>
+                  {wp.notes && <span className="text-parchment-400 font-light">— {wp.notes}</span>}
+                </span>
+                <button
+                  onClick={() => deleteWaypoint(wp.id)}
+                  className="text-red-400 hover:text-red-300 p-1 rounded hover:bg-red-500/10 transition-colors"
+                >
+                  <Trash2 size={12} />
+                </button>
               </div>
             ))}
           </div>
@@ -236,21 +254,50 @@ export default function MapReader() {
 
         {userPosition && (
           !showAddWaypoint ? (
-            <button onClick={() => setShowAddWaypoint(true)} className="w-full flex items-center justify-center gap-2 bg-lime-900/50 text-lime-400 py-1.5 rounded text-xs hover:bg-lime-900">
+            <button
+              onClick={() => setShowAddWaypoint(true)}
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-royal-700/60 to-royal-800/60 hover:from-royal-700/80 hover:to-royal-800/80 text-gold-200 py-2 rounded-lg text-xs font-semibold tracking-wide border border-gold-400/25 hover:border-gold-400/50 transition-all"
+            >
               <Plus size={14} /> {t('Add Waypoint at Your Location', 'Agregar Marcador en Su Ubicación')}
             </button>
           ) : (
-            <div className="flex gap-1">
-              <input type="text" placeholder={t('Name', 'Nombre')} value={newWaypoint.name} onChange={e => setNewWaypoint({ ...newWaypoint, name: e.target.value })} className="flex-1 bg-stone-800 border border-stone-700 rounded px-2 py-1 text-xs text-stone-200" />
-              <select value={newWaypoint.type} onChange={e => setNewWaypoint({ ...newWaypoint, type: e.target.value as Waypoint['type'] })} className="bg-stone-800 border border-stone-700 rounded px-2 py-1 text-xs text-stone-200">
+            <div className="flex flex-wrap gap-1.5 items-stretch">
+              <input
+                type="text"
+                placeholder={t('Name', 'Nombre')}
+                value={newWaypoint.name}
+                onChange={e => setNewWaypoint({ ...newWaypoint, name: e.target.value })}
+                className="flex-1 min-w-0 bg-obsidian-800/80 border border-royal-800/60 rounded-lg px-2.5 py-1.5 text-xs text-parchment-100 placeholder-parchment-500 focus:outline-none focus:border-gold-400/50 focus:ring-1 focus:ring-gold-400/30"
+              />
+              <select
+                value={newWaypoint.type}
+                onChange={e => setNewWaypoint({ ...newWaypoint, type: e.target.value as Waypoint['type'] })}
+                className="bg-obsidian-800/80 border border-royal-800/60 rounded-lg px-2 py-1.5 text-xs text-parchment-100 focus:outline-none focus:border-gold-400/50"
+              >
                 <option value="camp">{t('Camp', 'Campamento')}</option>
                 <option value="water">{t('Water', 'Agua')}</option>
                 <option value="danger">{t('Danger', 'Peligro')}</option>
                 <option value="rescue">{t('Rescue', 'Rescate')}</option>
               </select>
-              <input type="text" placeholder={t('Notes', 'Notas')} value={newWaypoint.notes} onChange={e => setNewWaypoint({ ...newWaypoint, notes: e.target.value })} className="flex-1 bg-stone-800 border border-stone-700 rounded px-2 py-1 text-xs text-stone-200" />
-              <button onClick={addWaypoint} className="bg-lime-600 text-white px-2 py-1 rounded text-xs">{t('Save', '✓')}</button>
-              <button onClick={() => setShowAddWaypoint(false)} className="bg-stone-700 text-stone-300 px-2 py-1 rounded text-xs">{t('X', 'X')}</button>
+              <input
+                type="text"
+                placeholder={t('Notes', 'Notas')}
+                value={newWaypoint.notes}
+                onChange={e => setNewWaypoint({ ...newWaypoint, notes: e.target.value })}
+                className="flex-1 min-w-0 bg-obsidian-800/80 border border-royal-800/60 rounded-lg px-2.5 py-1.5 text-xs text-parchment-100 placeholder-parchment-500 focus:outline-none focus:border-gold-400/50 focus:ring-1 focus:ring-gold-400/30"
+              />
+              <button
+                onClick={addWaypoint}
+                className="bg-gradient-to-br from-gold-400 to-gold-500 hover:from-gold-300 hover:to-gold-400 text-obsidian-950 px-2.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 shadow-[0_2px_10px_rgba(212,175,55,0.4)] transition-all"
+              >
+                <Check size={12} strokeWidth={3} />
+              </button>
+              <button
+                onClick={() => setShowAddWaypoint(false)}
+                className="bg-obsidian-800 hover:bg-obsidian-700 text-parchment-300 border border-royal-800/60 px-2.5 py-1.5 rounded-lg text-xs"
+              >
+                <X size={12} />
+              </button>
             </div>
           )
         )}
