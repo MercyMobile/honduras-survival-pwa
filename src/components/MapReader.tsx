@@ -105,19 +105,8 @@ export default function MapReader({ language }: MapReaderProps) {
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
       maxZoom: 18,
-      // Keep tiles visible up to 2 zoom levels beyond cache
       maxNativeZoom: 18,
-      // Reuse cached tiles rather than showing blank
       keepBuffer: 4,
-      // When a tile fails (offline + not cached) show a purple placeholder
-      errorTileUrl: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256">' +
-        '<rect width="256" height="256" fill="%230B0614"/>' +
-        '<line x1="0" y1="0" x2="256" y2="256" stroke="%232D1B4E" stroke-width="1"/>' +
-        '<line x1="256" y1="0" x2="0" y2="256" stroke="%232D1B4E" stroke-width="1"/>' +
-        '<rect x="1" y="1" width="254" height="254" fill="none" stroke="%232D1B4E" stroke-width="1"/>' +
-        '</svg>'
-      )}`,
     }).addTo(map);
 
     LOCATIONS.forEach(loc => {

@@ -57,23 +57,22 @@ export default defineConfig({
           // areas work offline indefinitely.
           // ----------------------------------------------------------------
           {
-            urlPattern: /^https:\/\/(?:tile|a\.tile|b\.tile|c\.tile)\.openstreetmap\.org\/.+\.png$/,
+            // OSM tiles are cross-origin <img> requests — the browser fetches
+            // them in no-cors mode naturally. The SW must NOT override mode to
+            // 'cors' (that breaks the img decode). Just let the request flow
+            // through as-is, cache the opaque response (status 0), and Leaflet
+            // renders it fine since <img> has always allowed cross-origin PNGs.
+            urlPattern: /^https:\/\/tile\.openstreetmap\.org\/.+\.png$/,
             handler: 'CacheFirst',
             options: {
               cacheName: 'osm-tiles',
               expiration: {
-                // 2000 tiles covers roughly the Honduras-region zoom levels
                 maxEntries: 2000,
-                // Tiles are valid for 30 days
                 maxAgeSeconds: 60 * 60 * 24 * 30,
               },
-              // Allow opaque responses (cross-origin tiles)
+              // status 0 = opaque cross-origin response; still renderable by <img>
               cacheableResponse: {
                 statuses: [0, 200],
-              },
-              fetchOptions: {
-                // Reuse cached tile if network is slow
-                mode: 'cors',
               },
             },
           },
