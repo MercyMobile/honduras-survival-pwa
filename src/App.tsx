@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Droplet, Heart, Compass, Scale } from 'lucide-react';
+import { Droplet, Heart, Compass, Scale, Church } from 'lucide-react';
 import SurvivalTab from './components/SurvivalTab';
 import LanguageToggle from './components/LanguageToggle';
 import SpeciesDatabase from './components/SpeciesDatabase';
 import MapReader from './components/MapReader';
 import CultureTab from './components/CultureTab';
+import PulpitTab from './components/PulpitTab';
 
-type MainTab = 'survival' | 'species' | 'map' | 'culture';
+type MainTab = 'survival' | 'species' | 'map' | 'culture' | 'pulpit';
 
 function App() {
   const [activeTab, setActiveTab] = useState<MainTab>('survival');
@@ -73,36 +74,43 @@ function App() {
         {activeTab === 'species' && <SpeciesDatabase language={language} />}
         {activeTab === 'map' && <MapReader language={language} />}
         {activeTab === 'culture' && <CultureTab language={language} />}
+        {activeTab === 'pulpit' && <PulpitTab language={language} />}
       </main>
 
       {/* Floating Bottom Navigation */}
       <nav className="shrink-0 pb-safe z-20 px-3 pb-3 pt-2">
         <div className="relative gradient-border-gold rounded-2xl bg-obsidian-800/80 backdrop-blur-2xl border border-royal-800/60 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.7),0_0_0_1px_rgba(212,175,55,0.08)] overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-royal-900/50 via-obsidian-800/20 to-transparent pointer-events-none" />
-          <div className="relative flex justify-around items-center px-2 py-2.5 sm:px-6">
+          <div className="relative flex justify-around items-center px-1 py-2.5 sm:px-4">
             <NavButton
-              icon={<Droplet size={22} strokeWidth={activeTab === 'survival' ? 2.5 : 1.75} />}
+              icon={<Droplet size={21} strokeWidth={activeTab === 'survival' ? 2.5 : 1.75} />}
               label={language === 'en' ? 'Survival' : 'Manual'}
               active={activeTab === 'survival'}
               onClick={() => setActiveTab('survival')}
             />
             <NavButton
-              icon={<Heart size={22} strokeWidth={activeTab === 'species' ? 2.5 : 1.75} />}
-              label={language === 'en' ? 'Flora/Fauna' : 'Flora/Fauna'}
+              icon={<Heart size={21} strokeWidth={activeTab === 'species' ? 2.5 : 1.75} />}
+              label={language === 'en' ? 'Flora' : 'Flora'}
               active={activeTab === 'species'}
               onClick={() => setActiveTab('species')}
             />
             <NavButton
-              icon={<Compass size={22} strokeWidth={activeTab === 'map' ? 2.5 : 1.75} />}
+              icon={<Compass size={21} strokeWidth={activeTab === 'map' ? 2.5 : 1.75} />}
               label={language === 'en' ? 'Map' : 'Mapa'}
               active={activeTab === 'map'}
               onClick={() => setActiveTab('map')}
             />
             <NavButton
-              icon={<Scale size={22} strokeWidth={activeTab === 'culture' ? 2.5 : 1.75} />}
+              icon={<Scale size={21} strokeWidth={activeTab === 'culture' ? 2.5 : 1.75} />}
               label={language === 'en' ? 'Culture' : 'Cultura'}
               active={activeTab === 'culture'}
               onClick={() => setActiveTab('culture')}
+            />
+            <NavButton
+              icon={<Church size={21} strokeWidth={activeTab === 'pulpit' ? 2.5 : 1.75} />}
+              label={language === 'en' ? 'Pulpit' : 'Púlpito'}
+              active={activeTab === 'pulpit'}
+              onClick={() => setActiveTab('pulpit')}
             />
           </div>
         </div>
@@ -116,7 +124,7 @@ function NavButton({ icon, label, active, onClick }: { icon: React.ReactNode, la
     <button
       onClick={onClick}
       aria-label={label}
-      className="relative flex flex-col items-center justify-center px-3 py-1.5 min-w-[64px] transition-all duration-300 group outline-none focus-visible:ring-2 focus-visible:ring-gold-400/60 rounded-xl"
+      className="relative flex flex-col items-center justify-center px-2 py-1.5 min-w-[56px] sm:min-w-[64px] transition-all duration-300 group outline-none focus-visible:ring-2 focus-visible:ring-gold-400/60 rounded-xl"
     >
       {/* Active glow background */}
       {active && (
