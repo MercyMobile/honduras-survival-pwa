@@ -235,8 +235,8 @@ export const SURVIVAL_DATA: SurvivalTopic[] = [
       { en: 'Splint material (sticks, bamboo)', es: 'Material para férula (palos, bambú)' }
     ],
     content: {
-      en: 'Honduras has two dangerous snakes: Fer-de-lance (hemotoxic) and Coral Snake (neurotoxic). Both require immediate evacuation.',
-      es: 'Honduras tiene dos serpientes peligrosas: Fer-de-lance (hemotóxica) y Coral (neurotóxica). Ambas requieren evacuación inmediata.'
+      en: 'Honduras has several dangerous snakes: Fer-de-lance (hemotoxic), Bushmaster, and Coral Snake (neurotoxic) are the most lethal. All require immediate evacuation.',
+      es: 'Honduras tiene varias serpientes peligrosas: Fer-de-lance (hemotóxica), Cascabela Muda (Bushmaster), y Coral (neurotóxica) son las más letales. Todas requieren evacuación inmediata.'
     },
     steps: [
       { text: { en: 'Stay calm - panic increases heart rate and venom spread', es: 'Mantenga la calma - el pánico aumenta ritmo cardíaco y propagación de veneno' } },
